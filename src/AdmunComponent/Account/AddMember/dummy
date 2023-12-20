@@ -1,0 +1,1408 @@
+import React, { useState } from 'react'
+
+import './Addmember.css'
+import AdminTopBar from '../../AdminTopBar/AdminTopBar'
+import AdminSideBar from '../../AdminSideBar/AdminSideBar'
+import { Link } from 'react-router-dom'
+// import AddMemberModal from './AddMemberModal'
+// import { Button, Form } from 'react-bootstrap'
+// import { useForm } from 'react-hook-form'
+// import { Submit } from '../../Service';
+import axios from 'axios'
+
+const Addmember = () => {
+
+// };
+const memberdata = {
+  fullName:"", 
+  accountNo:"",
+  department:"",
+  designation:"",
+  dob:"",
+  doj:"",
+  dor:"",
+  mobileNumber:"",
+  emailid:"",
+  address:"",
+  shares:"",
+  monthlyDeposit:"",
+  insurance:"",
+  bankAccountNo:"",
+  bankName:"",
+  branchCode:"",
+  branchName:"",
+  nomineeName:"",
+  relationWithNominee:"",
+  regFees:""
+}
+
+
+
+const [memberuserData,setMemberuserData]=useState(memberdata)
+    // State variables for form validation
+    // const [sharesError, setSharesError] = useState("");
+    // const [ErrormonthlyDeposit, setMonthlyDepositError] = useState("");
+    // const [emailError, setEmailError] = useState("");
+
+
+
+    // const validateForm = () => {
+    //   let isValid = true;
+  
+    //   // Validate Name
+    //   if (!memberuserData.fullName) {
+    //     setSharesError("Shares is required");
+    //     isValid = false;
+    //   } else {
+    //     setSharesError("");
+    //   }
+  
+    //   // Validate Phone
+    //   if (!memberuserData.monthlyDeposit) {
+    //     setMonthlyDepositError("Monthly Deposite is required");
+    //     isValid = false;
+    //   } else {
+    //     setMonthlyDepositError("");
+    //   }
+  
+    //   // Validate Email
+    //   // if (!memberuserData.emailId) {
+    //   //   setEmailError("Email is required");
+    //   //   isValid = false;
+    //   // } else {
+    //   //   setEmailError("");
+    //   // }
+  
+    //   return isValid;
+    // };
+
+
+
+
+
+
+	const resetForm = () => {
+		setMemberuserData(memberdata); // Reset the userData state to its initial empty state
+	  };
+	  
+
+
+
+	const handleMemberData = (e)=>{
+		setMemberuserData({...memberuserData,[e.target.name]:e.target.value})
+	}
+
+  
+	const SavememberData=(e)=>{
+    console.log(memberuserData);
+		e.preventDefault()
+    // if (validateForm()) {
+      axios.post("api/Member", memberuserData)
+        .then((res) => {
+          console.log(res);
+          // if (res.status === 200) {
+          //   resetForm();
+          // }
+        })
+        .catch((err) => {
+          console.log("This is the error", err);
+        });
+    // } else {
+    //   // Display an alert if the form is not valid
+    //   alert("Please fill out all the required fields before submitting.");
+    // }
+	}
+
+
+
+
+
+
+  return (
+    <div>
+        <div className="theme-red">
+
+   
+  {/* <!-- Search Bar -->  */}
+        <div className="search-bar">
+          <div className="search-icon">
+            <i className="material-icons">search</i>
+          </div>
+          <input type="text" placeholder="START TYPING..." />
+          <div className="close-search">
+            <i className="material-icons">close</i>
+          </div>
+       
+        </div>
+        {/* <!-- #END# Search Bar -->
+   
+   
+   
+   
+  <!-- Top Bar --> */}
+       <AdminTopBar/>
+        {/* <!-- #Top Bar --> */}
+
+
+        
+{/* sideBar */}
+
+
+<AdminSideBar  />
+{/* end sideBar */}
+
+        <section className="content">
+             <Link to="/">  <h4 >DASHBOARD</h4></Link>
+          <div className="container-fluid">
+            <div className="block-header">
+            
+            </div>
+
+     
+              {/* form starts */}
+            {/* <!-- Masked Input --> */}
+
+
+            <div className="row clearfix">
+              <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div className="card">
+                  <div className="header">
+                    <h2>ADD MEMBER (सदस्य जोडा)</h2>
+                  </div>
+                  <div className="body">
+                    <div className="demo-masked-input">
+                      <div className="row clearfix">
+                       <form>
+                       
+                     
+
+
+                        <div className="col-md-8">
+                          <b>Full Name (पूर्ण नाव)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Full Name"
+                                name='fullName'
+                                 value={memberuserData.fullName} onChange={handleMemberData}
+                             
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+                        <div className="col-md-8">
+                          <b>Account Number (खाते क्रमांक)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="number"
+                                className="form-control date"
+                                placeholder="Enter Account Number"
+                                name='accountNo'
+                               
+                                 value={memberuserData.accountNo} onChange={handleMemberData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Department (विभाग)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Department"
+                                name='department'
+                                // {...register("department")}
+                                 value={memberuserData.department} onChange={handleMemberData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Designation (पदनाम)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder='Enter Designation'
+                                name='designation'
+                                // {...register("designation")}
+                                 value={memberuserData.designation} onChange={handleMemberData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+
+                        <div className="col-md-8">
+                          <b>Date Of Birth</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="date"
+                                className="form-control date"
+                                name='dob'
+                                // {...register("dob")}
+                                 value={memberuserData.dob} onChange={handleMemberData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Date Of Joining</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="date"
+                                className="form-control date"
+                                name='doj'
+                                // {...register("doj")}
+                                 value={memberuserData.doj} onChange={handleMemberData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                        <div className="col-md-8">
+                          <b>DOR (Date of Retirement) निवृत्तीची तारीख</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="date"
+                                className="form-control date"
+                                name='dor'
+                                // {...register("dor")}
+                                 value={memberuserData.dor} onChange={handleMemberData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+                        <div className="col-md-8">
+                          <b>Mobile Number</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="number"
+                                className="form-control date"
+                                placeholder="Enter Mobile Number"
+                                name='mobileNumber'
+                                // {...register("mobileNumber")}
+                                 value={memberuserData.mobileNumber} onChange={handleMemberData}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+                        <div className="col-md-8">
+                          <b>email id</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="email"
+                                className="form-control date"
+                                placeholder="Enter email id"
+                                name='emailid'
+                                // {...register("emailid")}
+                                 value={memberuserData.emailid} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Address (पत्ता)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Address"
+                                name='address'
+                                // {...register("address")}
+                                 value={memberuserData.address} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Shares (भाग )</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Shares"
+                                name='shares'
+                                 value={memberuserData.shares} onChange={handleMemberData}
+                              
+                              />
+                              {/* <div className="error">{sharesError}</div> */}
+                            </div>
+                          </div>
+                           
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Monthly Deposit (मासिक ठेव )</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Monthly Deposit"
+                                name='monthlyDeposit'
+                                 value={memberuserData.MonthlyDeposit} onChange={handleMemberData}
+                               
+                              />
+                              {/* <div className="error">{ErrormonthlyDeposit}</div> */}
+                            </div>
+                          </div>
+                          {/* <p style={{color:"red"}}>{errors?.monthlydeposite?.message}</p> */}
+                        </div>
+
+
+
+
+                        <div className="col-md-8">
+                          <b>Insurance (सभासद कल्याण निधी)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Insurance"
+                                name='insurance'
+                                // {...register("insurance")}
+                                 value={memberuserData.insurance} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Bank Account Number (बँक खाते क्रमांक)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="number"
+                                className="form-control date"
+                                placeholder="Enter bank Account Number"
+                                name='bankAccountNo'
+                                // {...register("bankAccountNo")}
+                                 value={memberuserData.bankAccountNo} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Bank Name (बँकेचे नाव)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Bank Name"
+                                name='bankName'
+                                // {...register("bankName")}
+                                 value={memberuserData.bankName} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Branch Code (शाखा कोड)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Branch Code"
+                                name='branchCode'
+                                // {...register("branchCode")}
+                                 value={memberuserData.branchCode} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Branch Name (शाखा नाव)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Branch Name"
+                                name='branchName'
+                                // {...register("branchName")}
+                                 value={memberuserData.branchName} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Nominee's Name (नामनिर्देशित व्यक्तीचे नाव)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Nominee's Name"
+                                name='nomineeName'
+                                // {...register("nomineeName")}
+                                 value={memberuserData.nomineeName} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Nominee's Relation (नामनिर्देशित व्यक्तीचे नाते)</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="text"
+                                className="form-control date"
+                                placeholder="Enter Nominee's Relation"
+                                name='relationWithNominee'
+                                // {...register("relationWithNominee")}
+                                 value={memberuserData.relationWithNominee} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+
+                        <div className="col-md-8">
+                          <b>Registration Fee</b>
+                          <div className="input-group">
+                            <span className="input-group-addon">
+                              <i className="material-icons">person</i>
+                            </span>
+                            <div className="form-line">
+                              <input
+                                type="number"
+                                className="form-control date"
+                                placeholder="Enter Registration Fee"
+                                name='regFees'
+                                // {...register("regFees")}
+                                 value={memberuserData.regFees} onChange={handleMemberData}
+                              />
+                            
+                            </div>
+                          </div>
+                        </div>
+
+
+                       
+
+                        <button type="button"  onClick={SavememberData}  className=" btn btn-block btn-lg waves-effect">Report</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <!-- #END# Masked Input --> */}
+            {/* form starts */}
+
+
+
+          {/* Table start */}
+
+          {/* <div className="row clearfix">
+              <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div className="card">
+                  <div className="header">
+                    <h2>Add Member</h2>
+
+                  </div>
+                  <div className="body">
+                    <div className="table-responsive">
+                      <div
+                        id="DataTables_Table_1_wrapper"
+                        className="dataTables_wrapper form-inline dt-bootstrap"
+                      >
+                        <div className="dt-buttons">
+                          <a
+                            className="dt-button buttons-copy buttons-html5"
+                            tabIndex="0"
+                            aria-controls="DataTables_Table_1"
+                            href="#"
+                          >
+                            <span>Copy</span>
+                          </a>
+                          <a
+                            className="dt-button buttons-csv buttons-html5"
+                            tabIndex="0"
+                            aria-controls="DataTables_Table_1"
+                            href="#"
+                          >
+                            <span>CSV</span>
+                          </a>
+                          <a
+                            className="dt-button buttons-excel buttons-html5"
+                            tabIndex="0"
+                            aria-controls="DataTables_Table_1"
+                            href="#"
+                          >
+                            <span>Excel</span>
+                          </a>
+                          <a
+                            className="dt-button buttons-pdf buttons-html5"
+                            tabIndex="0"
+                            aria-controls="DataTables_Table_1"
+                            href="#"
+                          >
+                            <span>PDF</span>
+                          </a>
+                          <a
+                            className="dt-button buttons-print"
+                            tabIndex="0"
+                            aria-controls="DataTables_Table_1"
+                            href="#"
+                          >
+                            <span>Print</span>
+                          </a>
+                        </div>
+                        <div
+                          id="DataTables_Table_1_filter"
+                          className="dataTables_filter"
+                        >
+                          <label>
+                            Search:
+                            <input
+                              type="search"
+                              className="form-control input-sm"
+                              placeholder=""
+                              aria-controls="DataTables_Table_1"
+                            />
+                          </label>
+                        </div>
+
+
+
+
+
+
+
+                        <label>Show <select name="DataTables_Table_0_length" aria-controls="DataTables_Table_0" className="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label>
+
+
+
+
+
+
+
+
+                        <table
+                          className="table table-bordered table-striped table-hover dataTable js-exportable"
+                          id="DataTables_Table_1"
+                          role="grid"
+                          aria-describedby="DataTables_Table_1_info"
+                        >
+                          <thead>
+                            <tr role="row">
+                              <th
+                                className="sorting_asc a1"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-sort="ascending"
+                                aria-label="Name: activate to sort column descending"
+                                
+                              >
+                                Id
+                              </th>
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Full Name
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Account Number
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Department
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Designation
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                DOB
+                              </th>
+                              
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                DOJ
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                DOR
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                               Mobile Number
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                email id
+                              </th>
+
+                              <th
+                                className="sorting a3"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Office: activate to sort column ascending"
+                                
+                              >
+                                Address
+                              </th>
+
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Shares
+                              </th>
+
+                              <th
+                                className="sorting a3"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Office: activate to sort column ascending"
+                                
+                              >
+                                Monthly Deposite
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Insurence
+                              </th>
+
+                              <th
+                                className="sorting a3"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Office: activate to sort column ascending"
+                                
+                              >
+                                Bank Account Number
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Bank Name
+                              </th>
+
+                              <th
+                                className="sorting a3"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Office: activate to sort column ascending"
+                                
+                              >
+                                Branch Code
+                              </th>
+
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Branch Name
+                              </th>
+
+                              <th
+                                className="sorting a3"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Office: activate to sort column ascending"
+                                
+                              >
+                                Nominee
+                              </th>
+
+
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Nominee Relation
+                              </th>
+
+                              <th
+                                className="sorting a3"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Office: activate to sort column ascending"
+                                
+                              >
+                                Reg Fee
+                              </th>
+
+
+                              <th
+                                className="sorting a2"
+                                tabIndex="0"
+                                aria-controls="DataTables_Table_1"
+                                rowSpan="1"
+                                colSpan="1"
+                                aria-label="Position: activate to sort column ascending"
+                                
+                              >
+                                Edit
+                              </th>
+
+                          
+                              
+                              
+                              
+                            
+                            </tr>
+                          </thead>
+                        
+                          <tbody>
+                            <tr role="row" className="odd">
+                              <td className="sorting_1">Airi Satou</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                             
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                             
+                            </tr>
+                            <tr role="row" className="even">
+                              <td className="sorting_1">Angelica Ramos</td>
+                              <td>Chief Executive Officer (CEO)</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                             
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                             
+                            </tr>
+                            <tr role="row" className="odd">
+                              <td className="sorting_1">Ashton Cox</td>
+                              <td>Junior Technical Author</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                             
+                            </tr>
+                            <tr role="row" className="even">
+                              <td className="sorting_1">Bradley Greer</td>
+                              <td>Software Engineer</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                             
+                            </tr>
+                            <tr role="row" className="odd">
+                              <td className="sorting_1">Brenden Wagner</td>
+                              <td>Software Engineer</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                            
+                            </tr>
+                            <tr role="row" className="even">
+                              <td className="sorting_1">Brielle Williamson</td>
+                              <td>Integration Specialist</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                              
+                            </tr>
+                            <tr role="row" className="odd">
+                              <td className="sorting_1">Bruno Nash</td>
+                              <td>Software Engineer</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                             
+                            </tr>
+                            <tr role="row" className="even">
+                              <td className="sorting_1">Caesar Vance</td>
+                              <td>Pre-Sales Support</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                              
+                            </tr>
+                            <tr role="row" className="odd">
+                              <td className="sorting_1">Cara Stevens</td>
+                              <td>Sales Assistant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                             
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+
+
+
+
+
+
+
+
+                            </tr>
+                            <tr role="row" className="even">
+                              <td className="sorting_1">Cedric Kelly</td>
+                              <td>Senior Javascript Developer</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                            
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td>Accountant</td>
+                              <td><AddMemberModal/></td>
+                             
+                            </tr>
+                          </tbody>
+                        </table>
+                        <div
+                          className="dataTables_info"
+                          id="DataTables_Table_1_info"
+                          role="status"
+                          aria-live="polite"
+                        >
+                          Showing 1 to 10 of 57 entries
+                        </div>
+                        <div
+                          className="dataTables_paginate paging_simple_numbers"
+                          id="DataTables_Table_1_paginate"
+                        >
+                          <ul className="pagination">
+                            <li
+                              className="paginate_button previous disabled"
+                              id="DataTables_Table_1_previous"
+                            >
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="0"
+                                tabIndex="0"
+                              >
+                                Previous
+                              </a>
+                            </li>
+                            <li className="paginate_button active">
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="1"
+                                tabIndex="0"
+                              >
+                                1
+                              </a>
+                            </li>
+                            <li className="paginate_button ">
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="2"
+                                tabIndex="0"
+                              >
+                                2
+                              </a>
+                            </li>
+                            <li className="paginate_button ">
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="3"
+                                tabIndex="0"
+                              >
+                                3
+                              </a>
+                            </li>
+                            <li className="paginate_button ">
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="4"
+                                tabIndex="0"
+                              >
+                                4
+                              </a>
+                            </li>
+                            <li className="paginate_button ">
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="5"
+                                tabIndex="0"
+                              >
+                                5
+                              </a>
+                            </li>
+                            <li className="paginate_button ">
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="6"
+                                tabIndex="0"
+                              >
+                                6
+                              </a>
+                            </li>
+                            <li
+                              className="paginate_button next"
+                              id="DataTables_Table_1_next"
+                            >
+                              <a
+                                href="#"
+                                aria-controls="DataTables_Table_1"
+                                data-dt-idx="7"
+                                tabIndex="0"
+                              >
+                                Next
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> */}
+         {/*  Table end */}
+
+
+
+
+
+
+          </div>
+        </section>
+      </div>
+    </div>
+  )
+}
+
+export default Addmember

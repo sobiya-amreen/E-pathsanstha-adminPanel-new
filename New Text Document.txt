@@ -1,0 +1,5 @@
+ISOPTIX in Notion  :   https://www.notion.so/Getting-Started-dc9192e3f715446d8042eae2c98b4d5a?showMoveTo=true&saveParent=true
+
+install SQL server management system
+react hook form: is me form ko handle karne k liye react hook form use kia gaya hai 
+Utube link for react hook form:--  https://www.youtube.com/watch?v=Ru_vbZgCtqk
