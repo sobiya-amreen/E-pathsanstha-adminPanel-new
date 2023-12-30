@@ -90,7 +90,7 @@ const DeductionListGenerate = () => {
                               /> */}
 
                                 <Form.Control
-                                type="date"
+                                
                                 className="form-control time24"
                                 // placeholder="Enter Date"
 
